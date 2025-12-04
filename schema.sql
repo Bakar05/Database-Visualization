@@ -90,8 +90,8 @@ JOIN customers c
 DROP TABLE temp_orders;
 -------------------------------------------------------------------------------------
 
---- now i noticed that the purchase table 'customers' column purchase address contains
--- zip code and state so i decided to move them to seperate table
+--- now i noticed that the table 'customers', column purchaseAddress contain
+-- zip code and state in one, so i decided to move them to seperate table
 
 ALTER TABLE customers ADD COLUMN State TEXT;
 ALTER TABLE customers ADD COLUMN ZIP INTEGER;
@@ -103,7 +103,7 @@ UPDATE customers
 SET PurchaseAddress =  TRIM(REPLACE(PurchaseAddress, ', ' || TRIM(City) || ', ' || TRIM(State) || ' ' || TRIM(ZIP), '') );
 -------------------------------------------------------------------------------------
 
---- then i noticed that the orders table column, orderdate contains time and data in one so i decided to put them into different table
+--- then i noticed that the table "orders", column "orderdate" contains time and data in one so i decided to put them into different table
 ALTER TABLE orders ADD COLUMN time INTEGER;
 
 UPDATE orders SET time = SUBSTR(OrderDate, -8);
@@ -218,6 +218,7 @@ GROUP BY
     o.OrderDate
 ORDER BY 
     o.OrderDate;
+
 
 
 
